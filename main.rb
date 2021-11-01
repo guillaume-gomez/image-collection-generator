@@ -1,6 +1,9 @@
 require 'rmagick'
+require_relative 'generative_art'
 include Magick
 
+SOURCE_PATH = "layers"
+DIST_PATH = "./dist"
 
 def merge_images(filename_sources)
   return nil if filename_sources.empty?
@@ -13,5 +16,12 @@ def merge_images(filename_sources)
 end
 
 
-result = merge_images(["image1.png", "image2.png", "image3.png"])
-result.write("mabite.png")
+gen_art = GenerativeArt.new(SOURCE_PATH)
+combinations_paths = gen_art.generate_combination_paths
+
+print "#{combinations_paths.count} found for this assets part"
+
+combinations_paths.shuffle.first(25).each_with_index do |combination, index|
+ image = merge_images(combination)
+ image.write("#{DIST_PATH}/#{index}.png")
+end

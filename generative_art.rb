@@ -3,11 +3,11 @@ class GenerativeArt
   attr_reader :layers_data
 
 
-  def initialize(source_path = SOURCE_PATH)
+  def initialize(layers_position, source_path = SOURCE_PATH)
     @layers_data = []
     @source_path = source_path
 
-    parse_layers_folder
+    parse_layers_folder(layers_position)
   end
 
 
@@ -29,9 +29,8 @@ class GenerativeArt
     end
   end
 
-  def parse_layers_folder
-    layers_string = Dir.entries(SOURCE_PATH).reject{|entry| entry == "." || entry == ".."}
-    layers_string.each do |layer|
+  def parse_layers_folder(layers_name_and_position)
+    layers_name_and_position.each do |layer|
       layer = { name: layer, images_path: parse_layer_images(layer) }
       @layers_data << layer
     end

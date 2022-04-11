@@ -21,7 +21,7 @@ gen_art = GenerativeArt.new(['background', 'ball', 'eye_color', 'iris', 'shine',
 combinations_paths = gen_art.generate_combination_paths
 print "#{combinations_paths.count} found for this assets part"
 
-combinations_paths.first(10).each_with_index do |combination, index|
+combinations_paths.each_with_index do |combination, index|
   imagelist = ImageList.new(*combination)
   #imagelist.each { |i| i.background_color = "transparent" }
   image = imagelist.flatten_images

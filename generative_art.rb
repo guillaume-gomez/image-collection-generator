@@ -1,9 +1,8 @@
 class GenerativeArt
-  SOURCE_PATH = "./layers"
   attr_reader :layers_data
 
 
-  def initialize(layers_position, source_path = SOURCE_PATH)
+  def initialize(layers_position, source_path)
     @layers_data = []
     @source_path = source_path
 
